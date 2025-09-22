@@ -1,0 +1,5 @@
+document.addEventListener("DOMContentLoaded",function(){const sliders=document.querySelectorAll('[data-slide="parent"]');sliders.forEach((slider)=>{const img2Wrapper=slider.querySelector('[data-slide="image2-wrapper"]');const handler=slider.querySelector('[data-slide="handler"]');if(!img2Wrapper||!handler)return;let active=!1;function updateSlider(x){const rect=slider.getBoundingClientRect();let pos=((x-rect.left)/rect.width)*100;pos=Math.max(0,Math.min(100,pos));img2Wrapper.style.width=`${pos}%`;handler.style.left=`${pos}%`}
+function startDrag(e){active=!0;updateSlider(e.touches?e.touches[0].clientX:e.clientX)}
+function moveDrag(e){if(!active)return;updateSlider(e.touches?e.touches[0].clientX:e.clientX)}
+function endDrag(){active=!1}
+handler.addEventListener("mousedown",startDrag);window.addEventListener("mousemove",moveDrag);window.addEventListener("mouseup",endDrag);handler.addEventListener("touchstart",startDrag,{passive:!0});window.addEventListener("touchmove",moveDrag,{passive:!0});window.addEventListener("touchend",endDrag)})})
