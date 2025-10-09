@@ -6,16 +6,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     navbar.style.transition = 'all 200ms ease';
 
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'aria-expanded') {
-                btnNav.classList.add('show');
-                setTimeout(() => navbar.classList.remove('show'), 300);
-            }
+    btnNav.addEventListener('click', () => {
+        const expanded = btnNav.getAttribute('aria-expanded') === 'true';
+        requestAnimationFrame(() => {
+          if (expanded) {
+            navbar.classList.add('show');
+          } else {
+            navbar.classList.remove('show');
+          }
         });
     });
-
-  observer.observe(btnNav, { attributes: true, attributeFilter: ['aria-expanded'] });
     
     window.addEventListener('scroll', function () {
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
