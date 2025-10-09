@@ -4,17 +4,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let threshold = navbar.getAttribute('data-el-thresshold') ?? 100;
     
     window.addEventListener('scroll', function () {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
-      if (Math.abs(currentScroll - lastScrollTop) > threshold) {
-        if (currentScroll > lastScrollTop) {
-            if(document.querySelector('.w-nav-button').getAttribute('aria-expanded').toLowerCase() == 'false'){
-                navbar.classList.add('hidden')    
-            }
-        } else {
-            navbar.classList.remove('hidden')
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if(currentScroll > threshold){
+            navbar.classList.add('show')
+        }else{
+            navbar.classList.remove('show')
         }
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-      }
+    
+        if (Math.abs(currentScroll - lastScrollTop) > threshold) {
+            if (currentScroll > lastScrollTop) {
+                if(document.querySelector('.w-nav-button').getAttribute('aria-expanded').toLowerCase() == 'false'){
+                    navbar.classList.add('hidden')    
+                }
+            } else {
+                navbar.classList.remove('hidden')
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }
     });
 }, false);
